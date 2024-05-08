@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Rotator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            transition: ease-in 1s;
+            color: black;
+        }
+
+        body.dark {
+            background-color: rgb(73, 73, 73);
+            color: white;
+        }
+
+        img {
+            width: 400px;
+            height: 400px;
+            margin: 50px auto;
+            object-fit: cover;
+        }
+
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: blue;
+            color: whitesmoke;
+            border: none;
+            border-radius: 5px;
+            transition: 0.3s ease;
+   
+        }
+
+        button:hover {
+            background-color: red;
+        
+        }
+
+        .circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 40px;
+            border: 2px solid black;
+            text-align: center;
+            line-height: 80px;
+            font-size: 50px;
+            background-color: rgb(73, 73, 73);
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+
+        .circle.dark {
+            background-color: whitesmoke;
+        }
+
+        .circle span#icon::after {
+            content: "☀️";
+        }
+
+        .circle span#icon.dark::after {
+            content: "🌑";
+        }
+    </style>
+</head>
+<body>
+    <h1>Latihan Sir.Anas</h1>
+    <img src="RAcoon.jpg" alt="Foto" id="Foto">
+    <button id="prev-btn">Previous</button>
+    <button id="next-btn">Next</button>
+    <button id="reset-btn">Reset</button>
+    <div class="circle">
+        <span id="icon"></span>
+    </div>
+
+    <script>
+        const images = [
+            "RAcoon.jpg", 
+            "racoon2.jpg", 
+            "racoon3.jpg",
+            "Capyu.PNG"
+        ];
+
+        const imageElement = document.getElementById('Foto');
+        const prevButton = document.getElementById('prev-btn');
+        const nextButton = document.getElementById('next-btn');
+        const Resetbutton = document.getElementById('reset-btn');
+        const icon = document.getElementById("icon");
+
+        let currentIndex = 0;
+
+        function showImage(index) {
+            if (index < 0) {
+                index = images.length - 1;
+            } else if (index >= images.length) {
+                index = 0;
+            }
+            imageElement.src = images[index];
+            currentIndex = index;
+        }
+
+        prevButton.addEventListener('click', () => {
+            showImage(currentIndex - 1);
+        });
+
+        nextButton.addEventListener('click', () => {
+            showImage(currentIndex + 1);
+        });
+        Resetbutton.addEventListener('click', () => {
+            showImage(currentIndex = 0);
+        });
+
+        icon.addEventListener('click', function(){
+            this.classList.toggle('dark');
+            document.querySelector('.circle').classList.toggle('dark');
+            document.body.classList.toggle('dark')
+        })
+
+    </script>
+</body>
+</html>
